@@ -21,6 +21,9 @@ export const useCarouselStyles = makeStyles((theme: Theme) =>
             writingMode: 'vertical-rl',
             textOrientation: 'mixed',
             marginRight: theme.spacing(1)
+        },
+        paddle: {
+            borderRadius: 0
         }
     })
 );

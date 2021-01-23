@@ -9,7 +9,17 @@ export class ShowStore {
     searchedShows: IshowSearch[] = [];
 
     @observable
-    isInFlight: boolean = false;
+    fetchIsInFlight: boolean = false;
+
+    @observable
+    searchIsInFlight: boolean = false;
+
+    @computed
+    get searchedShowsTransformed(): Ishow[] {
+        const shows = this.searchedShows.map(({ show }) => show);
+        console.log('shows', shows);
+        return shows;
+    }
 
     @computed
     get dashboardShowsByGenre(): { genre: string, shows: Ishow[] }[] {
@@ -23,27 +33,35 @@ export class ShowStore {
             }));
     }
 
-    @action
-    async searchShows(searchTerm: string): Promise<void> {
-        try {
-            this.isInFlight = true;
-            this.searchedShows = await tvmaze.search.shows(searchTerm);
-        } catch ({ message }) {
-            console.error('searchShows error', message);
-        } finally {
-            this.isInFlight = false;
-        }
+    get dashboardShowsByRank() {
+        const shows = this.dashboardShows;
+
+        // There is a typo in interface for IShow in the tvmaze-api-ts lib - the key name for rating is ratring which is wrong.
+        // @ts-ignore
+        return shows.sort((showA, showB) => showB.rating.average - showA.rating.average);
     }
 
     @action
     async fetchIndexShows(): Promise<void> {
         try {
-            this.isInFlight = true;
+            this.fetchIsInFlight = true;
             this.dashboardShows = await tvmaze.shows.page();
         } catch ({ message }) {
             console.error('fetchIndexShows error', message);
         } finally {
-            this.isInFlight = false;
+            this.fetchIsInFlight = false;
+        }
+    }
+
+    @action
+    async searchShows(searchTerm: string): Promise<void> {
+        try {
+            this.searchIsInFlight = true;
+            this.searchedShows = await tvmaze.search.shows(searchTerm);
+        } catch ({ message }) {
+            console.error('searchShows error', message);
+        } finally {
+            this.searchIsInFlight = false;
         }
     }
 };

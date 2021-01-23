@@ -1,4 +1,23 @@
-import { makeStyles, Theme, createStyles } from "@material-ui/core";
+import { createStyles, makeStyles, Theme } from "@material-ui/core";
+
+export const useShowDashboardStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        itemListWrappedRowContainer: {
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap'
+        }
+    })
+);
+
+export const useDashboardControlStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        container: {
+            marginTop: theme.spacing(1),
+            marginBottom: theme.spacing(2),
+        }
+    })
+);
 
 export const useShowCarouselStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -25,6 +44,10 @@ export const useShowItemStyles = makeStyles((theme: Theme) =>
         },
         media: {
             height: 140,
+        },
+        ratingContainer: {
+            display: 'flex',
+            alignItems: 'center'
         }
     })
 );

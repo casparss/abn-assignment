@@ -24,6 +24,7 @@ export const Carousel: React.FC<{
     return (
         <div className={classes.container}>
             <IconButton
+                className={classes.paddle}
                 aria-label="Left carousel paddle"
                 onClick={decrementIdx}
                 disabled={isSliderAtBeginning}
@@ -43,6 +44,7 @@ export const Carousel: React.FC<{
 
             {!isSliderAtEnd && (
                 <IconButton
+                    className={classes.paddle}
                     aria-label="Right carousel paddle"
                     onClick={incremetIdx}
                 >
