@@ -4,15 +4,28 @@ export const useShowCarouselStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {
             display: 'flex',
-            flexDirection: 'row'
+            flexDirection: 'row',
+            marginBottom: theme.spacing(2)
         },
-        slidesContainer: {
+        carouselContainer: {
             display: 'flex',
-            flexDirection: 'row'
+            flexDirection: 'row',
+            overflowY: 'auto'
+        },
+        sliderContainer: {
+            display: 'flex',
+            flexDirection: 'row',
+            paddingBottom: 2,
+            overflow: 'hidden'
+        },
+        slider: {
+            display: 'flex',
+            flexDirection: 'row',
         },
         title: {
             writingMode: 'vertical-rl',
-            textOrientation: 'mixed'
+            textOrientation: 'mixed',
+            marginRight: theme.spacing(1)
         }
     })
 );
@@ -20,8 +33,10 @@ export const useShowCarouselStyles = makeStyles((theme: Theme) =>
 export const useShowItemStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {
-            height: 250,
-            width: 140
+            height: 220,
+            width: 140,
+            marginRight: theme.spacing(1),
+            flexShrink: 0
         },
         media: {
             height: 140,
