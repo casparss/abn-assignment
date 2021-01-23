@@ -7,21 +7,6 @@ export const useShowCarouselStyles = makeStyles((theme: Theme) =>
             flexDirection: 'row',
             marginBottom: theme.spacing(2)
         },
-        carouselContainer: {
-            display: 'flex',
-            flexDirection: 'row',
-            overflowY: 'auto'
-        },
-        sliderContainer: {
-            display: 'flex',
-            flexDirection: 'row',
-            paddingBottom: 2,
-            overflow: 'hidden'
-        },
-        slider: {
-            display: 'flex',
-            flexDirection: 'row',
-        },
         title: {
             writingMode: 'vertical-rl',
             textOrientation: 'mixed',
