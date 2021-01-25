@@ -27,7 +27,7 @@ export class ShowModel {
     seasons: Iseason[] = [];
 
     @observable
-    episodes: Iepisode[] = []
+    episodes: Iepisode[] = [];
 
     @action
     private async fetchcast(): Promise<void> {

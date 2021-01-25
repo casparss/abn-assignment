@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import React from "react";
 import { ShowDetails } from "./types";
 import Rating from "../Rating";
-import useShowDetailsStyles from "./styles";
+import { useCoverStyles } from "./styles";
 
 export const Cover: React.FC<ShowDetails> = observer(
     ({
@@ -13,18 +13,24 @@ export const Cover: React.FC<ShowDetails> = observer(
             show: { name, rating, summary, image },
         },
     }) => {
-        const classes = useShowDetailsStyles();
+        const classes = useCoverStyles();
 
         return (
             <Paper elevation={2}>
-                <Typography variant="h2">{name}</Typography>
-                <Rating rating={rating && rating.average} />
-                <img
-                    className={classes.cover}
-                    src={image && image.original}
-                    alt="Show cover"
-                />
-                <Typography variant="body1">{parse(summary)}</Typography>
+                <div className={classes.titleBar}>
+                    <Typography variant="h2">{name}</Typography>
+                    <Rating rating={rating && rating.average} />
+                </div>
+
+                <main className={classes.main}>
+                    <img
+                        className={classes.cover}
+                        src={image && image.original}
+                        alt="Show cover"
+                    />
+
+                    <Typography variant="body1">{parse(summary)}</Typography>
+                </main>
             </Paper>
         );
     }

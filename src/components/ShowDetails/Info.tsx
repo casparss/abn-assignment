@@ -5,14 +5,15 @@ import {
     ListItemAvatar,
     ListItemText,
     Paper,
+    Typography,
 } from "@material-ui/core";
 import ImageIcon from "@material-ui/icons/Image";
 import React from "react";
 import { ShowDetails } from "./types";
-import useShowDetailsStyles from "./styles";
+import { useInfoStyles } from "./styles";
 
 export const Info: React.FC<ShowDetails> = ({ showModel }) => {
-    const classes = useShowDetailsStyles();
+    const classes = useInfoStyles();
 
     const {
         language,
@@ -26,7 +27,9 @@ export const Info: React.FC<ShowDetails> = ({ showModel }) => {
 
     return (
         <Paper elevation={2}>
-            <List className={classes.root}>
+            <Typography variant="h1">Cast</Typography>
+
+            <List className={classes.listContaier}>
                 <ListItem>
                     <ListItemAvatar>
                         <Avatar>
