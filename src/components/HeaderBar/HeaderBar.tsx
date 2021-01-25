@@ -7,10 +7,11 @@ import {
 } from "@material-ui/core";
 import { ArrowBack } from "@material-ui/icons";
 import SearchIcon from "@material-ui/icons/Search";
-import React from "react";
+import React, { useRef } from "react";
 import { Route, useHistory } from "react-router-dom";
 import { useStore } from "../../store/StoreProvider";
 import { useSearchInputStyles } from "./styles";
+import debounce from "lodash.debounce";
 
 export const HeaderBar = () => {
     const history = useHistory();
@@ -40,6 +41,9 @@ export const HeaderBar = () => {
 const SearchInput = () => {
     const classes = useSearchInputStyles();
     const { show: showStore } = useStore();
+    const { current: searchShows } = useRef(
+        debounce((searchTerm: string) => showStore.searchShows(searchTerm), 300)
+    );
 
     return (
         <div className={classes.search}>
@@ -53,9 +57,7 @@ const SearchInput = () => {
                     input: classes.inputInput,
                 }}
                 inputProps={{ "aria-label": "search" }}
-                onChange={({ target: { value } }) =>
-                    showStore.searchShows(value)
-                }
+                onChange={({ target: { value } }) => searchShows(value)}
             />
         </div>
     );

@@ -3,26 +3,27 @@ import {
     CardActionArea,
     CardContent,
     CardMedia,
+    CircularProgress,
     FormControl,
     InputLabel,
     MenuItem,
-    Paper,
     Select,
     Typography,
 } from "@material-ui/core";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Ishow } from "tvmaze-api-ts";
 import { useStore } from "../../store/StoreProvider";
 import mapComponent from "../../utils/mapComponent";
 import Carousel from "../Carousel";
+import Rating from "../Rating/Rating";
 import {
     useDashboardControlStyles,
     useShowCarouselStyles,
     useShowDashboardStyles,
     useShowItemStyles,
 } from "./styles";
-import StarIcon from "@material-ui/icons/Star";
 
 enum FeedType {
     RATING = "rating",
@@ -41,12 +42,11 @@ const ShowDashboard = observer(() => {
 
     useEffect(() => {
         setFeedType(
-            showStore.searchedShowsTransformed.length > 0 ||
-                showStore.searchIsInFlight
+            showStore.searchedShows.length > 0 || showStore.searchIsInFlight
                 ? FeedType.SEARCH
                 : FeedType.GENRE
         );
-    }, [showStore.searchedShowsTransformed.length]);
+    }, [showStore.searchedShows.length]);
 
     const dashboardControls = (
         <DashboardControls
@@ -55,13 +55,20 @@ const ShowDashboard = observer(() => {
         />
     );
 
+    if (showStore.isLoading) {
+        return (
+            <div className={classes.loadingContainer}>
+                <CircularProgress size={60} className={classes.spinner} />
+                <Typography variant="body1">Loading shows...</Typography>
+            </div>
+        );
+    }
+
     switch (feedType) {
         case FeedType.SEARCH:
             return (
                 <div className={classes.itemListWrappedRowContainer}>
-                    {showStore.searchedShowsTransformed.map(
-                        mapComponent(ShowItem)
-                    )}
+                    {showStore.searchedShows.map(mapComponent(ShowItem))}
                 </div>
             );
         case FeedType.RATING:
@@ -131,34 +138,38 @@ const ShowCarousel: React.FC<{ genre: string; shows: Ishow[] }> = observer(
 );
 
 const ShowItem: React.FC<Ishow> = observer(
-    // @ts-ignore
-    // @TODO: fork amaze lib and correct issue perhaps?
-    ({ name, rating: { average: showRating }, image }) => {
+    ({
+        id,
+        name,
+        image,
+        // @ts-ignore
+        rating: { average: showRating },
+    }) => {
         const classes = useShowItemStyles();
 
         return (
-            <Card className={classes.container}>
-                <CardActionArea>
-                    <CardMedia
-                        className={classes.media}
-                        image={image && (image.medium || image.original)}
-                        title={name}
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="body2" component="p">
-                            {name}
-                        </Typography>
+            <Link to={`/show-details/${id}`}>
+                <Card className={classes.container}>
+                    <CardActionArea>
+                        <CardMedia
+                            className={classes.media}
+                            image={image && (image.medium || image.original)}
+                            title={name}
+                        />
+                        <CardContent>
+                            <Typography
+                                gutterBottom
+                                variant="body2"
+                                component="p"
+                            >
+                                {name}
+                            </Typography>
 
-                        <Paper
-                            elevation={0}
-                            className={classes.ratingContainer}
-                        >
-                            <StarIcon />
-                            {showRating}
-                        </Paper>
-                    </CardContent>
-                </CardActionArea>
-            </Card>
+                            <Rating rating={showRating} />
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+            </Link>
         );
     }
 );

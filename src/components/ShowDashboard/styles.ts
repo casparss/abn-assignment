@@ -5,7 +5,21 @@ export const useShowDashboardStyles = makeStyles((theme: Theme) =>
         itemListWrappedRowContainer: {
             display: 'flex',
             flexDirection: 'row',
-            flexWrap: 'wrap'
+            flexWrap: 'wrap',
+            '& > div': {
+                marginBottom: theme.spacing(1)
+            }
+        },
+        loadingContainer: {
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%'
+        },
+        spinner: {
+            marginBottom: theme.spacing(1)
         }
     })
 );
