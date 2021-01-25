@@ -31,6 +31,9 @@ export const useInfoStyles = makeStyles((theme) => ({
         maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
     },
+    avatar: {
+        backgroundColor: theme.palette.secondary.main
+    }
 }));
 
 export const useSeasonsStyles = makeStyles((theme) => ({

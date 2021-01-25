@@ -5,16 +5,15 @@ import {
     ListItemAvatar,
     ListItemText,
 } from "@material-ui/core";
+import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import CategoryIcon from "@material-ui/icons/Category";
+import HouseIcon from "@material-ui/icons/House";
+import LanguageIcon from "@material-ui/icons/Language";
+import TimerIcon from "@material-ui/icons/Timer";
 import React from "react";
 import Card from "./Card";
 import { useInfoStyles } from "./styles";
 import { ShowDetails } from "./types";
-import ImageIcon from "@material-ui/icons/Image";
-import TimerIcon from "@material-ui/icons/Timer";
-import LanguageIcon from "@material-ui/icons/Language";
-import CategoryIcon from "@material-ui/icons/Category";
-import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
-import HouseIcon from "@material-ui/icons/House";
 
 export const Info: React.FC<ShowDetails> = ({ showModel }) => {
     const classes = useInfoStyles();
@@ -26,7 +25,7 @@ export const Info: React.FC<ShowDetails> = ({ showModel }) => {
             <List className={classes.listContaier}>
                 <ListItem>
                     <ListItemAvatar>
-                        <Avatar>
+                        <Avatar className={classes.avatar}>
                             <TimerIcon />
                         </Avatar>
                     </ListItemAvatar>
@@ -35,7 +34,7 @@ export const Info: React.FC<ShowDetails> = ({ showModel }) => {
 
                 <ListItem>
                     <ListItemAvatar>
-                        <Avatar>
+                        <Avatar className={classes.avatar}>
                             <LanguageIcon />
                         </Avatar>
                     </ListItemAvatar>
@@ -44,7 +43,7 @@ export const Info: React.FC<ShowDetails> = ({ showModel }) => {
 
                 <ListItem>
                     <ListItemAvatar>
-                        <Avatar>
+                        <Avatar className={classes.avatar}>
                             <CategoryIcon />
                         </Avatar>
                     </ListItemAvatar>
@@ -56,7 +55,7 @@ export const Info: React.FC<ShowDetails> = ({ showModel }) => {
 
                 <ListItem>
                     <ListItemAvatar>
-                        <Avatar>
+                        <Avatar className={classes.avatar}>
                             <CalendarTodayIcon />
                         </Avatar>
                     </ListItemAvatar>
@@ -65,7 +64,7 @@ export const Info: React.FC<ShowDetails> = ({ showModel }) => {
 
                 <ListItem>
                     <ListItemAvatar>
-                        <Avatar>
+                        <Avatar className={classes.avatar}>
                             <HouseIcon />
                         </Avatar>
                     </ListItemAvatar>
