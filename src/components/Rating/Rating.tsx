@@ -3,7 +3,11 @@ import { Paper } from "@material-ui/core";
 import StarIcon from "@material-ui/icons/Star";
 import { useRatingStyles } from "./styles";
 
-export const Rating: React.FC<{ rating: number }> = ({ rating }) => {
+export interface RatingProps {
+    rating: number;
+}
+
+export const Rating: React.FC<RatingProps> = ({ rating }) => {
     const classes = useRatingStyles();
 
     return (
