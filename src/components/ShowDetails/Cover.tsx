@@ -5,6 +5,7 @@ import React from "react";
 import { ShowDetails } from "./types";
 import Rating from "../Rating";
 import { useCoverStyles } from "./styles";
+import Card from "./Card";
 
 export const Cover: React.FC<ShowDetails> = observer(
     ({
@@ -15,23 +16,25 @@ export const Cover: React.FC<ShowDetails> = observer(
     }) => {
         const classes = useCoverStyles();
 
+        const titleBar = (
+            <>
+                <Typography variant="h2">{name}</Typography>
+                <Rating rating={rating && rating.average} />
+            </>
+        );
+
         return (
-            <Paper elevation={2}>
-                <div className={classes.titleBar}>
-                    <Typography variant="h2">{name}</Typography>
-                    <Rating rating={rating && rating.average} />
-                </div>
+            <Card titleBarStyle={classes.titleBar} customTitleBar={titleBar}>
+                <img
+                    className={classes.cover}
+                    src={image && image.original}
+                    alt="Show cover"
+                />
 
-                <main className={classes.main}>
-                    <img
-                        className={classes.cover}
-                        src={image && image.original}
-                        alt="Show cover"
-                    />
-
-                    <Typography variant="body1">{parse(summary)}</Typography>
-                </main>
-            </Paper>
+                <Typography variant="body2" color="textSecondary" component="p">
+                    {parse(summary)}
+                </Typography>
+            </Card>
         );
     }
 );

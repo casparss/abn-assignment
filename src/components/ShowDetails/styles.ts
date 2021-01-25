@@ -3,9 +3,9 @@ import { makeStyles } from "@material-ui/core";
 export const useShowDetailsStyles = makeStyles((theme) => ({
     container: {
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        columnGap: '3em',
-        rowGap: '3em'
+        gridTemplateColumns: '1fr 1fr 1fr 1fr',
+        columnGap: '1.5em',
+        rowGap: '1.5em'
     }
 }));
 
@@ -42,6 +42,9 @@ export const useSeasonsStyles = makeStyles((theme) => ({
             marginBottom: theme.spacing(1),
         }
     },
+    image: {
+        width: '100px'
+    }
 }));
 
 export const useCastStyles = makeStyles((theme) => ({
@@ -53,6 +56,27 @@ export const useCastStyles = makeStyles((theme) => ({
             marginBottom: theme.spacing(1),
         }
     },
+    castItemContainer: {
+        border: `1px solid ${theme.palette.grey[100]}`,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: theme.spacing(1)
+    }
+}));
+
+export const useCardStyles = makeStyles((theme) => ({
+    titleBar: {
+        backgroundColor: theme.palette.info.light,
+        padding: theme.spacing(1)
+    },
+    title: {
+        color: theme.palette.info.contrastText
+    },
+    main: {
+        padding: theme.spacing(2)
+    }
 }));
 
 

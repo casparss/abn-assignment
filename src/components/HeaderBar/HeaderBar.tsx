@@ -19,7 +19,7 @@ export const HeaderBar = () => {
     return (
         <AppBar position="static">
             <Toolbar>
-                <Route path="/stores/user/:userId">
+                <Route path="/show-details/:showId">
                     <IconButton
                         edge="start"
                         color="inherit"
@@ -30,9 +30,11 @@ export const HeaderBar = () => {
                     </IconButton>
                 </Route>
 
-                <Typography variant="h6">ABN Amro assignment</Typography>
+                <Route path="/dashboard">
+                    <SearchInput />
+                </Route>
 
-                <SearchInput />
+                <Typography variant="h6">ABN Amro assignment</Typography>
             </Toolbar>
         </AppBar>
     );

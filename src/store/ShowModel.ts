@@ -1,5 +1,5 @@
 import { action, observable } from "mobx";
-import { Icast, Icastcredits, Iepisode, Iseason, Ishow, tvmaze } from 'tvmaze-api-ts';
+import { Icast, Iepisode, Iseason, Ishow, tvmaze } from 'tvmaze-api-ts';
 
 export class ShowModel {
     constructor(show: Ishow) {

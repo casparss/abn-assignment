@@ -11,6 +11,7 @@ import ImageIcon from "@material-ui/icons/Image";
 import React from "react";
 import { ShowDetails } from "./types";
 import { useInfoStyles } from "./styles";
+import Card from "./Card";
 
 export const Info: React.FC<ShowDetails> = ({ showModel }) => {
     const classes = useInfoStyles();
@@ -26,9 +27,7 @@ export const Info: React.FC<ShowDetails> = ({ showModel }) => {
     } = showModel.show;
 
     return (
-        <Paper elevation={2}>
-            <Typography variant="h1">Cast</Typography>
-
+        <Card title="Info">
             <List className={classes.listContaier}>
                 <ListItem>
                     <ListItemAvatar>
@@ -66,7 +65,7 @@ export const Info: React.FC<ShowDetails> = ({ showModel }) => {
                     <ListItemText primary="Official site" />
                 </ListItem>
             </List>
-        </Paper>
+        </Card>
     );
 };
 

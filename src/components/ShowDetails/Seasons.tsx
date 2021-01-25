@@ -1,6 +1,7 @@
-import { CircularProgress, Paper, Typography } from "@material-ui/core";
+import { CircularProgress, Typography } from "@material-ui/core";
 import { observer } from "mobx-react";
 import React from "react";
+import Card from "./Card";
 import { useSeasonsStyles } from "./styles";
 import { ShowDetails } from "./types";
 
@@ -13,26 +14,20 @@ export const Seasons: React.FC<ShowDetails> = observer(
         }
 
         return (
-            <Paper>
-                <Typography variant="h2">Seasons</Typography>
-
-                <main className={classes.main}>
-                    {seasons.map(({ number, image, summary }) => {
-                        return (
-                            <div>
-                                <Typography>Season {number}</Typography>
-                                <img
-                                    src={
-                                        image &&
-                                        (image.medium || image.original)
-                                    }
-                                    alt="Season cover"
-                                />
-                            </div>
-                        );
-                    })}
-                </main>
-            </Paper>
+            <Card title="Seasons" mainStyle={classes.main}>
+                {seasons.map(({ number, image, summary }) => {
+                    return (
+                        <div>
+                            <Typography>Season {number}</Typography>
+                            <img
+                                className={classes.image}
+                                src={image && (image.medium || image.original)}
+                                alt="Season cover"
+                            />
+                        </div>
+                    );
+                })}
+            </Card>
         );
     }
 );
