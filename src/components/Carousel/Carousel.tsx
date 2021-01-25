@@ -4,12 +4,14 @@ import mapComponent from "../../utils/mapComponent";
 import useCarouselStyles from "./styles";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
-import { IconButton } from "@material-ui/core";
+import { IconButton, Typography } from "@material-ui/core";
 
-export const Carousel: React.FC<{
+export interface CarouselProps {
     items: unknown[];
     Item: React.FunctionComponent<any>;
-}> = ({ items, Item }) => {
+}
+
+export const Carousel: React.FC<CarouselProps> = ({ items, Item }) => {
     const classes = useCarouselStyles();
 
     const {
@@ -20,6 +22,14 @@ export const Carousel: React.FC<{
         isSliderAtBeginning,
         isSliderAtEnd,
     } = useCarousel(items);
+
+    if (items.length === 0) {
+        return (
+            <Typography variant="body2" color="textSecondary" component="p">
+                No carousel items
+            </Typography>
+        );
+    }
 
     return (
         <div className={classes.container}>
