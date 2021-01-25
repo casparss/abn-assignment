@@ -1,13 +1,22 @@
 import { Paper, Typography } from "@material-ui/core";
-import React from "react";
+import React, { ReactNode } from "react";
 import { useCardStyles } from "./styles";
 
-export const Card: React.FC<{
+export interface CardProps {
     title?: string;
     mainStyle?: string;
     titleBarStyle?: string;
     customTitleBar?: React.ReactElement;
-}> = ({ title, children, customTitleBar, titleBarStyle, mainStyle }) => {
+    children: ReactNode;
+}
+
+export const Card: React.FC<CardProps> = ({
+    title,
+    children,
+    customTitleBar,
+    titleBarStyle,
+    mainStyle,
+}) => {
     const classes = useCardStyles();
 
     return (
@@ -16,7 +25,7 @@ export const Card: React.FC<{
                 {customTitleBar ? (
                     customTitleBar
                 ) : (
-                    <Typography className={classes.title} variant="h4">
+                    <Typography className={classes.title} variant="h6">
                         {title}
                     </Typography>
                 )}

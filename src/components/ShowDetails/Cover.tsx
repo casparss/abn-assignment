@@ -10,7 +10,6 @@ import Card from "./Card";
 export const Cover: React.FC<ShowDetails> = observer(
     ({
         showModel: {
-            // @ts-ignore
             show: { name, rating, summary, image },
         },
     }) => {

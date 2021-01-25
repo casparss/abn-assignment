@@ -1,12 +1,17 @@
 import { Typography } from "@material-ui/core";
 import { observer } from "mobx-react";
 import React from "react";
-import { Ishow } from "tvmaze-api-ts";
+import { Ishow } from "../../services/ShowService/types";
 import Carousel from "../Carousel";
 import ShowItem from "./ShowItem";
 import { useShowCarouselStyles } from "./styles";
 
-const ShowCarousel: React.FC<{ genre: string; shows: Ishow[] }> = observer(
+export interface ShowCarouselProps {
+    genre: string;
+    shows: Ishow[];
+}
+
+export const ShowCarousel: React.FC<ShowCarouselProps> = observer(
     ({ genre, shows }) => {
         const classes = useShowCarouselStyles();
 

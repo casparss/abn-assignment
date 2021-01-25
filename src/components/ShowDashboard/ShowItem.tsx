@@ -7,44 +7,36 @@ import {
 } from "@material-ui/core";
 import { observer } from "mobx-react";
 import React from "react";
-import { Link } from "react-router-dom";
-import { Ishow } from "tvmaze-api-ts";
+import { Link, useHistory } from "react-router-dom";
+import { Ishow } from "../../services/ShowService/types";
 import Rating from "../Rating/Rating";
 import { useShowItemStyles } from "./styles";
 
 export const ShowItem: React.FC<Ishow> = observer(
-    ({
-        id,
-        name,
-        image,
-        // @ts-ignore
-        rating: { average: showRating },
-    }) => {
+    ({ id, name, image, rating: { average: showRating } }) => {
         const classes = useShowItemStyles();
+        const history = useHistory();
 
         return (
-            <Link to={`/show-details/${id}`}>
-                <Card className={classes.container}>
-                    <CardActionArea>
-                        <CardMedia
-                            className={classes.media}
-                            image={image && (image.medium || image.original)}
-                            title={name}
-                        />
-                        <CardContent>
-                            <Typography
-                                gutterBottom
-                                variant="body2"
-                                component="p"
-                            >
-                                {name}
-                            </Typography>
+            <Card
+                className={classes.container}
+                onClick={() => history.push(`/show-details/${id}`)}
+            >
+                <CardActionArea>
+                    <CardMedia
+                        className={classes.media}
+                        image={image && (image.medium || image.original)}
+                        title={name}
+                    />
+                    <CardContent className={classes.cardContent}>
+                        <Typography gutterBottom variant="body2" component="p">
+                            {name}
+                        </Typography>
 
-                            <Rating rating={showRating} />
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-            </Link>
+                        <Rating rating={showRating} />
+                    </CardContent>
+                </CardActionArea>
+            </Card>
         );
     }
 );

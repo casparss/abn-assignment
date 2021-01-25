@@ -9,68 +9,82 @@ import ShowCarousel from "./ShowCarousel";
 import ShowItem from "./ShowItem";
 import { useShowDashboardStyles } from "./styles";
 
-const ShowDashboard = observer(() => {
-    const classes = useShowDashboardStyles();
-    const { show: showStore } = useStore();
-    const [feedType, setFeedType] = useState<FeedType>(FeedType.GENRE);
+export interface ShowDashboardProps {
+    defaultFeedType?: FeedType;
+}
 
-    useEffect(() => {
-        showStore.fetchIndexShows();
-    }, []);
+const ShowDashboard: React.FC<ShowDashboardProps> = observer(
+    ({ defaultFeedType = FeedType.GENRE }) => {
+        const classes = useShowDashboardStyles();
+        const { show: showStore } = useStore();
+        const [feedType, setFeedType] = useState<FeedType>(defaultFeedType);
 
-    useEffect(() => {
-        setFeedType(
-            showStore.searchedShows.length > 0 || showStore.searchIsInFlight
-                ? FeedType.SEARCH
-                : FeedType.GENRE
+        useEffect(() => {
+            showStore.fetchIndexShows();
+        }, []);
+
+        useEffect(() => {
+            setFeedType(
+                showStore.searchedShows.length > 0 || showStore.searchIsInFlight
+                    ? FeedType.SEARCH
+                    : FeedType.GENRE
+            );
+        }, [showStore.searchedShows.length]);
+
+        const dashboardControls = (
+            <DashboardControls
+                feedTypeSelectChanged={setFeedType}
+                feedType={feedType}
+            />
         );
-    }, [showStore.searchedShows.length]);
 
-    const dashboardControls = (
-        <DashboardControls
-            feedTypeSelectChanged={setFeedType}
-            feedType={feedType}
-        />
-    );
-
-    if (showStore.isLoading) {
-        return (
-            <div className={classes.loadingContainer}>
-                <CircularProgress size={60} className={classes.spinner} />
-                <Typography variant="body1">Loading shows...</Typography>
-            </div>
-        );
-    }
-
-    switch (feedType) {
-        case FeedType.SEARCH:
+        if (showStore.isLoading) {
             return (
-                <div className={classes.itemListWrappedRowContainer}>
-                    {showStore.searchedShows.map(mapComponent(ShowItem))}
+                <div className={classes.loadingContainer}>
+                    <CircularProgress size={60} className={classes.spinner} />
+                    <Typography variant="body1">Loading shows...</Typography>
                 </div>
             );
-        case FeedType.RATING:
-            return (
-                <>
-                    {dashboardControls}
-                    <div className={classes.itemListWrappedRowContainer}>
-                        {showStore.dashboardShowsByRank.map(
-                            mapComponent(ShowItem)
+        }
+
+        switch (feedType) {
+            case FeedType.SEARCH:
+                return (
+                    <>
+                        <Typography className={classes.searchResultsText}>
+                            Showing {showStore.searchedShows.length} search
+                            results
+                        </Typography>
+                        <div className={classes.itemListWrappedRowContainer}>
+                            {showStore.searchedShows.map(
+                                mapComponent(ShowItem)
+                            )}
+                        </div>
+                    </>
+                );
+            case FeedType.RATING:
+                return (
+                    <>
+                        {dashboardControls}
+                        <div className={classes.itemListWrappedRowContainer}>
+                            {showStore.dashboardShowsByRank.map(
+                                mapComponent(ShowItem)
+                            )}
+                        </div>
+                    </>
+                );
+            case FeedType.GENRE:
+            default:
+                return (
+                    <>
+                        {dashboardControls}
+                        {showStore.dashboardShowsByGenre.map(
+                            mapComponent(ShowCarousel)
                         )}
-                    </div>
-                </>
-            );
-        case FeedType.GENRE:
-        default:
-            return (
-                <>
-                    {dashboardControls}
-                    {showStore.dashboardShowsByGenre.map(
-                        mapComponent(ShowCarousel)
-                    )}
-                </>
-            );
+                    </>
+                );
+        }
     }
-});
+);
 
 export default ShowDashboard;

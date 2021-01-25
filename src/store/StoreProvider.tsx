@@ -5,8 +5,13 @@ const StoreContext = createContext(rootStore);
 
 export const useStore = () => useContext(StoreContext);
 
-export const StoreProvider: React.FC<{}> = ({ children }) => (
-    <StoreContext.Provider value={rootStore}>{children}</StoreContext.Provider>
+export const StoreProvider: React.FC<{ value?: any }> = ({
+    children,
+    value,
+}) => (
+    <StoreContext.Provider value={value ?? rootStore}>
+        {children}
+    </StoreContext.Provider>
 );
 
 export default StoreProvider;

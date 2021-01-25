@@ -6,7 +6,13 @@ import { useSeasonsStyles } from "./styles";
 import { ShowDetails } from "./types";
 
 export const Seasons: React.FC<ShowDetails> = observer(
-    ({ showModel: { seasons, isFetchSeasonsInFlight } }) => {
+    ({
+        showModel: {
+            show: { image: showImage },
+            seasons,
+            isFetchSeasonsInFlight,
+        },
+    }) => {
         const classes = useSeasonsStyles();
 
         if (isFetchSeasonsInFlight) {
@@ -15,13 +21,14 @@ export const Seasons: React.FC<ShowDetails> = observer(
 
         return (
             <Card title="Seasons" mainStyle={classes.main}>
-                {seasons.map(({ number, image, summary }) => {
+                {seasons.map(({ number, image }) => {
+                    console.log("image", image);
                     return (
                         <div>
                             <Typography>Season {number}</Typography>
                             <img
                                 className={classes.image}
-                                src={image && (image.medium || image.original)}
+                                src={image?.medium ?? showImage.medium}
                                 alt="Season cover"
                             />
                         </div>

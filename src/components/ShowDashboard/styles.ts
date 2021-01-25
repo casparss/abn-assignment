@@ -6,7 +6,8 @@ export const useShowDashboardStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
-            '& > div': {
+            justifyContent: 'center',
+            '& > div, a': {
                 marginBottom: theme.spacing(1)
             }
         },
@@ -20,6 +21,9 @@ export const useShowDashboardStyles = makeStyles((theme: Theme) =>
         },
         spinner: {
             marginBottom: theme.spacing(1)
+        },
+        searchResultsText: {
+            marginBottom: theme.spacing(3)
         }
     })
 );
@@ -29,6 +33,8 @@ export const useDashboardControlStyles = makeStyles((theme: Theme) =>
         container: {
             marginTop: theme.spacing(1),
             marginBottom: theme.spacing(2),
+            display: 'flex',
+            justifyContent: 'center'
         }
     })
 );
@@ -51,17 +57,26 @@ export const useShowCarouselStyles = makeStyles((theme: Theme) =>
 export const useShowItemStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {
-            height: 220,
+            height: 250,
             width: 140,
             marginRight: theme.spacing(1),
-            flexShrink: 0
+            flexShrink: 0,
+            justifyContent: 'center'
+        },
+        cardContent: {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+
         },
         media: {
             height: 140,
         },
         ratingContainer: {
             display: 'flex',
-            alignItems: 'center'
+            alignItems: 'center',
+            justifyContent: 'center'
         }
     })
 );

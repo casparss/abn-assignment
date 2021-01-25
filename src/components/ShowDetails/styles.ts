@@ -68,18 +68,15 @@ export const useCastStyles = makeStyles((theme) => ({
 
 export const useCardStyles = makeStyles((theme) => ({
     titleBar: {
-        backgroundColor: theme.palette.info.light,
-        padding: theme.spacing(1)
+        padding: theme.spacing(1),
+        borderBottom: `1px solid ${theme.palette.grey[200]}`
     },
     title: {
-        color: theme.palette.info.contrastText
+        color: theme.palette.primary.main
     },
     main: {
         padding: theme.spacing(2)
     }
 }));
-
-
-
 
 export default useShowDetailsStyles;

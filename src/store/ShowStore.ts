@@ -1,8 +1,22 @@
 import { action, computed, observable } from "mobx";
-import { Ishow, tvmaze } from 'tvmaze-api-ts';
+import ShowService from "../services/ShowService";
+import { Ishow } from "../services/ShowService/types";
 import ShowModel from "./ShowModel";
 
+export interface ShowStoreArgs {
+    dashboardShows: Ishow[];
+    searchedShows: Ishow[];
+}
+
 export class ShowStore {
+    constructor(showStoreArgs?: ShowStoreArgs) {
+        if (showStoreArgs) {
+            const { dashboardShows, searchedShows } = showStoreArgs;
+            this.dashboardShows = dashboardShows;
+            this.searchedShows = searchedShows;
+        }
+    }
+
     @observable
     dashboardShows: Ishow[] = [];
 
@@ -34,11 +48,8 @@ export class ShowStore {
     }
 
     get dashboardShowsByRank() {
-        const shows = this.dashboardShows;
 
-        // There is a typo in interface for IShow in the tvmaze-api-ts lib - the key name for rating is ratring which is wrong.
-        // @ts-ignore
-        return shows.sort((showA, showB) => showB.rating.average - showA.rating.average).slice(0, 30);
+        return this.dashboardShows.sort((showA, showB) => showB.rating.average - showA.rating.average).slice(0, 30);
     }
 
     selectShowModelById(selectId: number): ShowModel | undefined {
@@ -50,10 +61,10 @@ export class ShowStore {
     }
 
     @action
-    async fetchIndexShows(): Promise<void> {
+    async fetchIndexShows(page: number = 1): Promise<void> {
         try {
             this.fetchIsInFlight = true;
-            this.dashboardShows = await tvmaze.shows.page();
+            this.dashboardShows = await ShowService.fetchIndex(page);
         } catch ({ message }) {
             console.error('fetchIndexShows error', message);
         } finally {
@@ -65,7 +76,7 @@ export class ShowStore {
     async searchShows(searchTerm: string): Promise<void> {
         try {
             this.searchIsInFlight = true;
-            const shows = await tvmaze.search.shows(searchTerm);
+            const shows = await ShowService.search(searchTerm);
             this.searchedShows = shows.map(({ show }) => show);
         } catch ({ message }) {
             console.error('searchShows error', message);

@@ -12,7 +12,7 @@ export const Rating: React.FC<RatingProps> = ({ rating }) => {
 
     return (
         <Paper elevation={0} className={classes.container}>
-            <StarIcon />
+            <StarIcon color="primary" />
             {rating}
         </Paper>
     );

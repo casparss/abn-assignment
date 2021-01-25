@@ -1,3 +1,5 @@
+const { Console } = require("console");
+
 module.exports = {
   "stories": [
     "../src/components/**/*.stories.mdx",
