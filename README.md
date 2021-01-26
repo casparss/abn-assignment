@@ -25,3 +25,7 @@ Run project: `npm start`
 Run Storybook: `npm run storybook`
 
 Run tests: `npm test`
+
+### Things I would do with more
+
+Something I would've like to have done is added some intelligent lazy loading of items into the DOM. The HTTP requests are fast, but loading hundreds of items from the feed all at once with images locks up the thread for a couple of seconds and is quite janky. I've sliced down the items for a quick win performance for this test.
