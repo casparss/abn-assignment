@@ -48,7 +48,6 @@ export class ShowStore {
     }
 
     get dashboardShowsByRank() {
-
         return this.dashboardShows.sort((showA, showB) => showB.rating.average - showA.rating.average).slice(0, 30);
     }
 

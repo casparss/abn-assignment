@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import { observer } from "mobx-react";
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Ishow } from "../../services/ShowService/types";
 import Rating from "../Rating/Rating";
 import { useShowItemStyles } from "./styles";

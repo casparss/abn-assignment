@@ -21,19 +21,16 @@ export const Seasons: React.FC<ShowDetails> = observer(
 
         return (
             <Card title="Seasons" mainStyle={classes.main}>
-                {seasons.map(({ number, image }) => {
-                    console.log("image", image);
-                    return (
-                        <div>
-                            <Typography>Season {number}</Typography>
-                            <img
-                                className={classes.image}
-                                src={image?.medium ?? showImage.medium}
-                                alt="Season cover"
-                            />
-                        </div>
-                    );
-                })}
+                {seasons.map(({ number, image }) => (
+                    <div>
+                        <Typography>Season {number}</Typography>
+                        <img
+                            className={classes.image}
+                            src={image?.medium ?? showImage.medium}
+                            alt="Season cover"
+                        />
+                    </div>
+                ))}
             </Card>
         );
     }

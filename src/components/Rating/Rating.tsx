@@ -4,7 +4,7 @@ import StarIcon from "@material-ui/icons/Star";
 import { useRatingStyles } from "./styles";
 
 export interface RatingProps {
-    rating: number;
+    rating?: number;
 }
 
 export const Rating: React.FC<RatingProps> = ({ rating }) => {
@@ -12,8 +12,8 @@ export const Rating: React.FC<RatingProps> = ({ rating }) => {
 
     return (
         <Paper elevation={0} className={classes.container}>
-            <StarIcon color="primary" />
-            {rating}
+            <StarIcon color={rating ? "secondary" : "disabled"} />
+            {rating && rating}
         </Paper>
     );
 };
