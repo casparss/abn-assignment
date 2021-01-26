@@ -32,7 +32,7 @@ export const Carousel: React.FC<CarouselProps> = ({ items, Item }) => {
     }
 
     return (
-        <div className={classes.container} style={{ display: "block" }}>
+        <div className={classes.container}>
             <IconButton
                 className={classes.paddle}
                 aria-label="Left carousel paddle"

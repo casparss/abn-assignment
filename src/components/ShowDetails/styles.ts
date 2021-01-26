@@ -5,7 +5,13 @@ export const useShowDetailsStyles = makeStyles((theme) => ({
         display: 'grid',
         gridTemplateColumns: '1fr 1fr 1fr 1fr',
         columnGap: '1.5em',
-        rowGap: '1.5em'
+        rowGap: '1.5em',
+        [theme.breakpoints.down('sm')]: {
+            gridTemplateColumns: '1fr 1fr',
+        },
+        [theme.breakpoints.down('xs')]: {
+            gridTemplateColumns: '1fr',
+        }
     }
 }));
 

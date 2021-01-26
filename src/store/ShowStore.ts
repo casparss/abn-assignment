@@ -39,7 +39,7 @@ export class ShowStore {
                 genre: genre as string,
                 shows: shows.filter(({ genres }) => genres.includes(genre as string)).slice(0, 15)
             }))
-            .slice(0, 3);
+            .slice(0, 5);
     }
 
     @computed

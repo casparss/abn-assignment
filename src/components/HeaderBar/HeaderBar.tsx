@@ -10,10 +10,11 @@ import SearchIcon from "@material-ui/icons/Search";
 import React, { useRef } from "react";
 import { Route, useHistory } from "react-router-dom";
 import { useStore } from "../../store/StoreProvider";
-import { useSearchInputStyles } from "./styles";
+import { useHeaderBarStyles, useSearchInputStyles } from "./styles";
 import debounce from "lodash.debounce";
 
 export const HeaderBar = () => {
+    const classes = useHeaderBarStyles();
     const history = useHistory();
 
     return (
@@ -34,7 +35,9 @@ export const HeaderBar = () => {
                     <SearchInput />
                 </Route>
 
-                <Typography variant="h6">ABN Amro assignment</Typography>
+                <Typography variant="h6" className={classes.title}>
+                    ABN Amro assignment
+                </Typography>
             </Toolbar>
         </AppBar>
     );
@@ -52,6 +55,7 @@ const SearchInput = () => {
             <div className={classes.searchIcon}>
                 <SearchIcon />
             </div>
+
             <InputBase
                 placeholder="Search…"
                 classes={{
