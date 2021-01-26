@@ -1,8 +1,8 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react/types-6-0";
-import Card, { CardProps } from "./Card";
+import Card, { CardProps } from "../Card";
 import { Typography } from "@material-ui/core";
-import { Center } from "../../utils/storyBookDecorators";
+import { Center } from "../../../utils/storyBookDecorators";
 
 export default {
     title: "Card",

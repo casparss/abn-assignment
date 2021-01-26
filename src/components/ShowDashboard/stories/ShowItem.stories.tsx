@@ -1,7 +1,7 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react/types-6-0";
-import ShowItem from "./ShowItem";
-import { Ishow } from "../../services/ShowService/types";
+import ShowItem from "../ShowItem";
+import { Ishow } from "../../../services/ShowService/types";
 import { BrowserRouter } from "react-router-dom";
 
 export default {

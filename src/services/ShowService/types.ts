@@ -133,7 +133,7 @@ export interface Ishow {
     rating: Irating;
     weight: number;
     network: Inetwork | null;
-    webChannel: string | null;
+    webChannel: IwebChannel | null;
     externals: Iexternals;
     image: Iimage;
     summary: string;
@@ -141,6 +141,14 @@ export interface Ishow {
     _links?: I_links;
     _embedded?: I_embedded;
 }
+
+export interface IwebChannel {
+    id: number;
+    name: string;
+    country: Icountry | null;
+}
+
+
 export interface IshowSearch {
     score: number;
     show: Ishow;

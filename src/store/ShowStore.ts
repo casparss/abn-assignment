@@ -51,11 +51,15 @@ export class ShowStore {
         return this.dashboardShows.sort((showA, showB) => showB.rating.average - showA.rating.average).slice(0, 30);
     }
 
+    @action
     selectShowModelById(selectId: number): ShowModel | undefined {
         const show = this.dashboardShows.find(({ id }) => selectId === id) || this.searchedShows.find(({ id }) => selectId === id);
 
         if (show) {
-            return new ShowModel(show);
+            const showModel = new ShowModel(show);
+            showModel.fetchCast();
+            showModel.fetchSeasons();
+            return showModel;
         }
     }
 

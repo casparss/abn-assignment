@@ -35,3 +35,5 @@ export const fetchResource = async <T>({
 
     return response.json();
 }
+
+export default fetchResource;

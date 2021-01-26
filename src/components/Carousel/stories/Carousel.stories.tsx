@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { Meta, Story } from "@storybook/react/types-6-0";
 import React from "react";
-import Carousel, { CarouselProps } from "./Carousel";
+import Carousel, { CarouselProps } from "../Carousel";
 
 const useStyles = makeStyles({
     root: {

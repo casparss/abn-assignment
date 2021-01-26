@@ -5,8 +5,6 @@ import { Icast, Iseason, Ishow } from "../services/ShowService/types";
 export class ShowModel {
     constructor(show: Ishow) {
         this.show = show;
-        this.fetchcast();
-        this.fetchSeasons();
     }
 
     @observable
@@ -25,7 +23,7 @@ export class ShowModel {
     seasons: Iseason[] = [];
 
     @action
-    private async fetchcast(): Promise<void> {
+    async fetchCast(): Promise<void> {
         try {
             this.isFetchCastInFlight = true;
             this.cast = await ShowService.fetchCast(this.show.id);
@@ -37,7 +35,7 @@ export class ShowModel {
     }
 
     @action
-    private async fetchSeasons(): Promise<void> {
+    async fetchSeasons(): Promise<void> {
         try {
             this.isFetchSeasonsInFlight = true;
             this.seasons = await ShowService.fetchSeasons(this.show.id);
