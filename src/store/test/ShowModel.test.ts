@@ -8,11 +8,15 @@ const fetchResource = fetchResourceModule.fetchResource as jest.MockedFunction<t
 
 describe("Show model tests.", () => {
     beforeAll(() => {
-        fetchResource.mockResolvedValue(Promise.resolve([]));
+        fetchResource.mockResolvedValue([]);
+    });
+
+    afterAll(() => {
+        jest.unmock('../../utils/fetch');
     });
 
     test("fetchSeasons() sets seasons prop correctly.", async () => {
-        fetchResource.mockResolvedValue(Promise.resolve(seasonsFixture));
+        fetchResource.mockResolvedValue(seasonsFixture);
         const showModel = new ShowModel(showsFixture[0]);
         await showModel.fetchSeasons();
         expect(showModel?.seasons).toBeDefined();
@@ -20,7 +24,7 @@ describe("Show model tests.", () => {
     });
 
     test("fetchCast() sets cast prop correctly.", async () => {
-        fetchResource.mockResolvedValue(Promise.resolve(castFixture));
+        fetchResource.mockResolvedValue(castFixture);
         const showModel = new ShowModel(showsFixture[0]);
         await showModel.fetchCast();
         expect(showModel?.cast).toBeDefined();

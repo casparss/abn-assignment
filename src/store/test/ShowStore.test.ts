@@ -6,7 +6,11 @@ const fetchResource = fetchResourceModule.fetchResource as jest.MockedFunction<t
 
 describe("Show store tests.", () => {
     beforeAll(() => {
-        fetchResource.mockResolvedValue(Promise.resolve([]));
+        fetchResource.mockResolvedValue([]);
+    });
+
+    afterAll(() => {
+        jest.unmock('../../utils/fetch');
     });
 
     test("computed prop dashboardshows by genre returns correct data", () => {
@@ -16,7 +20,7 @@ describe("Show store tests.", () => {
         });
 
         const shows = showStore.dashboardShowsByGenre;
-        expect(shows.length).toBe(3);
+        expect(shows.length).toBe(5);
 
         expect(shows[0].genre).toBe('Drama');
         expect(shows[0].shows.length).toBe(15);
@@ -51,7 +55,7 @@ describe("Show store tests.", () => {
     });
 
     test("fetchIndexShows() correctly sets dashboardShows.", async () => {
-        fetchResource.mockResolvedValue(Promise.resolve([showsFixture[0]]));
+        fetchResource.mockResolvedValue([showsFixture[0]]);
         const showStore = new ShowStore();
         await showStore.fetchIndexShows();
 
@@ -60,7 +64,7 @@ describe("Show store tests.", () => {
     });
 
     test("searchShows() correctly sets searchedShows.", async () => {
-        fetchResource.mockResolvedValue(Promise.resolve([{ show: showsFixture[0], ranking: 1 }]));
+        fetchResource.mockResolvedValue([{ show: showsFixture[0], ranking: 1 }]);
         const showStore = new ShowStore();
         await showStore.searchShows('stuff');
 

@@ -47,6 +47,7 @@ export class ShowStore {
         return this.fetchIsInFlight || this.searchIsInFlight;
     }
 
+    @computed
     get dashboardShowsByRank() {
         return this.dashboardShows.sort((showA, showB) => showB.rating.average - showA.rating.average).slice(0, 30);
     }
