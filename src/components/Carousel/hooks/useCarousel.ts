@@ -33,6 +33,7 @@ export const useCarousel = (items: unknown[]) => {
     };
 
     return {
+        idx,
         sliderRef,
         sliderStyle,
         isSliderAtBeginning,
