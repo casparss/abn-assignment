@@ -32,12 +32,13 @@ export const Carousel: React.FC<CarouselProps> = ({ items, Item }) => {
     }
 
     return (
-        <div className={classes.container}>
+        <div className={classes.container} style={{ display: "block" }}>
             <IconButton
                 className={classes.paddle}
                 aria-label="Left carousel paddle"
                 onClick={decrementIdx}
                 disabled={isSliderAtBeginning}
+                data-prev
             >
                 <KeyboardArrowLeftIcon />
             </IconButton>
@@ -47,6 +48,7 @@ export const Carousel: React.FC<CarouselProps> = ({ items, Item }) => {
                     className={classes.slider}
                     ref={sliderRef}
                     style={sliderStyle}
+                    data-slider
                 >
                     {items.map(mapComponent(Item))}
                 </div>
@@ -57,6 +59,7 @@ export const Carousel: React.FC<CarouselProps> = ({ items, Item }) => {
                     className={classes.paddle}
                     aria-label="Right carousel paddle"
                     onClick={incremetIdx}
+                    data-next
                 >
                     <KeyboardArrowRightIcon />
                 </IconButton>

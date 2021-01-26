@@ -1,11 +1,11 @@
-import { Paper, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import parse from "html-react-parser";
 import { observer } from "mobx-react";
 import React from "react";
-import { ShowDetails } from "./types";
 import Rating from "../Rating";
-import { useCoverStyles } from "./styles";
 import Card from "./Card";
+import { useCoverStyles } from "./styles";
+import { ShowDetails } from "./types";
 
 export const Cover: React.FC<ShowDetails> = observer(
     ({
